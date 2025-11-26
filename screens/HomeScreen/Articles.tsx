@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Calendar, Heart, Tag } from "lucide-react";
 
 export default function Article() {
@@ -6,7 +9,7 @@ export default function Article() {
       <h2 className="text-center text-2xl md:text-3xl font-bold text-primary-c mb-5">
         Articles and News
       </h2>
-      <h3 className="text-center text-xl md:text-2xl font-semibold mb-4">
+      <h3 className="text-center text-xl md:text-2xl font-semibold mb-8">
         Checkout Latest Articles And News From Our Blog
       </h3>
       <div className="flex w-full overflow-x-auto gap-6 py-4">
@@ -34,74 +37,91 @@ function ArticleCard({
   likes: number;
 }) {
   return (
-    <div className="flex flex-col gap-8 rounded-3xl p-4 w-[350px] shrink-0">
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      className="relative w-[350px] md:w-[400px] lg:w-[450px] h-[450px] rounded-3xl overflow-hidden flex-shrink-0 cursor-pointer"
+    >
+      {/* Background Image */}
       <img
         src={image}
-        alt="image"
-        className="object-cover h-[250px] w-full rounded-3xl"
+        alt={title}
+        className="absolute inset-0 w-full h-full object-cover"
       />
 
-      <h3 className="h-[2em] text-xl font-semibold ">{title}</h3>
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/50 to-transparent" />
 
-      <p className="h-[3em] text-sm leading-relaxed">{description}</p>
+      {/* Tag Badge top-left */}
+      <div className="absolute top-4 left-4">
+        <span className="bg-primary-c text-white text-xs font-semibold px-3 py-1 rounded-full">
+          {category}
+        </span>
+      </div>
 
-      <div className="w-full flex justify-between items-center text-sm text-secondary-cs">
-        <div className="flex gap-1 text-nowrap items-center text-primary-c">
-          <Tag className="w-4 h-4" />
-          <p className="w-[7em] truncate">{category}</p>
-        </div>
-        <div className="flex gap-1 text-nowrap items-center">
-          <Calendar className="w-4 h-4" />
-          <p>{date}</p>
-        </div>
-        <div className="flex gap-1 text-nowrap items-center">
-          <Heart className="w-4 h-4" />
-          <p>{likes} Likes</p>
+      {/* Bottom-left content */}
+      <div className="absolute bottom-4 left-4 text-white w-[90%]">
+        <h3 className="text-xl md:text-2xl font-bold drop-shadow-md">
+          {title}
+        </h3>
+        <p className="text-sm md:text-base mt-1 line-clamp-3 drop-shadow-md">
+          {description}
+        </p>
+
+        {/* Small buttons for date and likes */}
+        <div className="flex gap-3 mt-3">
+          <div className="flex items-center gap-1 bg-white/20 px-3 py-1 rounded-full text-xs">
+            <Calendar className="w-4 h-4" />
+            <span>{date}</span>
+          </div>
+          <div className="flex items-center gap-1 bg-white/20 px-3 py-1 rounded-full text-xs">
+            <Heart className="w-4 h-4" />
+            <span>{likes} Likes</span>
+          </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export const articleData = [
   {
     image:
-      "https://images.unsplash.com/photo-1629397685944-7073f5589754?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fGhhaXIlMjBzYWxvbnxlbnwwfHwwfHx8MA%3D%3D",
+      "https://images.unsplash.com/photo-1629397685944-7073f5589754?w=600&auto=format&fit=crop&q=60",
     title: "Discover Everything Hairxify Does",
     description:
       "Hairxify is revolutionising the beauty and wellness industry by connecting clients with top professionals...",
-    category: "Beauty and style",
+    category: "Beauty & Style",
     date: "20/11/2024",
     likes: 24,
   },
   {
     image:
-      "https://images.unsplash.com/photo-1607008829749-c0f284a49fc4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGhhaXIlMjBzYWxvbnxlbnwwfHwwfHx8MA%3D%3D",
+      "https://images.unsplash.com/photo-1607008829749-c0f284a49fc4?w=600&auto=format&fit=crop&q=60",
     title: "5 Daily Beauty Habits That Transform Your Skin",
     description:
       "A simple guide highlighting everyday routines—hydration, sunscreen, and good nutrition improve skin health...",
-    category: "Beauty and style",
+    category: "Beauty & Style",
     date: "20/11/2024",
     likes: 24,
   },
   {
     image:
-      "https://images.unsplash.com/photo-1626379501846-0df4067b8bb9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGhhaXIlMjBzYWxvbnxlbnwwfHwwfHx8MA%3D%3D",
+      "https://images.unsplash.com/photo-1626379501846-0df4067b8bb9?w=600&auto=format&fit=crop&q=60",
     title: "Why Self-Care Is Not a Luxury",
     description:
       "Explore science-backed wellness habits like meditation, massage, aromatherapy and more...",
-    category: "Beauty and wellness",
+    category: "Beauty & Wellness",
     date: "20/11/2024",
     likes: 24,
   },
   {
     image:
-      "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aGFpciUyMHNhbG9ufGVufDB8fDB8fHww",
-    title: "Why Self-Care Is Not a Luxury",
+      "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=600&auto=format&fit=crop&q=60",
+    title: "The Best Hair Treatments This Season",
     description:
-      "Explore science-backed wellness habits like meditation, massage, aromatherapy and more...",
-    category: "Beauty and wellness",
-    date: "20/11/2024",
-    likes: 24,
+      "Learn about the top treatments that nourish, protect, and style your hair while enhancing natural beauty...",
+    category: "Hair Care",
+    date: "21/11/2024",
+    likes: 30,
   },
 ];

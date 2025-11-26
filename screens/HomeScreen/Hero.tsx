@@ -134,7 +134,7 @@ export default function Hero() {
             {media.map((item, i) => (
               <CarouselItem
                 key={i}
-                className="basis-[70%] md:basis-[55%] lg:basis-[40%]"
+                className="basis-[75%] md:basis-[75%] lg:basis-[50%]"
               >
                 <div
                   className={cn(
